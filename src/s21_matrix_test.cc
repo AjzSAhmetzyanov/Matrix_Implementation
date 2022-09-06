@@ -1,6 +1,9 @@
 #include <gtest/gtest.h>
 
+#include <iostream>
+
 #include "s21_matrix_oop.h"
+
 TEST(test_eq_matrix, test1) {
   S21Matrix matrix1(3, 3);
   S21Matrix matrix2(3, 3);
@@ -34,7 +37,7 @@ TEST(mul_matrix, test4) {
   S21Matrix matrix(2, 2);
   S21Matrix matrix1(2, 2);
   S21Matrix matrix_res(2, 2);
-  matrix.number_padding(3);
+  matrix.number_padding(2);
   matrix1.number_padding(1);
   matrix_res.number_padding(1);
   matrix_res.mul_matrix(matrix1);
@@ -44,8 +47,10 @@ TEST(mul_matrix, test4) {
 TEST(trans, test5) {
   S21Matrix matrix(2, 2);
   S21Matrix matrix1(2, 2);
-  matrix1 = matrix.transpose();
-  ASSERT_EQ(matrix1.eq_matrix(matrix), true);
+  matrix.number_padding(1);
+  matrix1.number_padding(1);
+  matrix.transpose();
+  ASSERT_EQ(matrix.eq_matrix(matrix1), true);
 }
 
 TEST(det, test6) {
@@ -59,43 +64,43 @@ TEST(det, test6) {
 TEST(calc, test7) {
   S21Matrix matrix(2, 2);
   S21Matrix matrix1(2, 2);
-  matrix.number_padding(0);
-  matrix1 = matrix.calc_complements();
-  ASSERT_EQ(matrix1.eq_matrix(matrix), true);
+  matrix.calc_complements();
+  ASSERT_EQ(matrix.eq_matrix(matrix1), true);
 }
 
 TEST(inverse, test8) {
   S21Matrix matrix(2, 2);
   S21Matrix matrix1(2, 2);
-  S21Matrix matrix2(2, 2);
   matrix(0, 0) = 1;
   matrix(0, 1) = 3;
   matrix(1, 0) = 1;
   matrix(1, 1) = 2;
-  matrix2(0, 0) = -2;
-  matrix2(0, 1) = 3;
-  matrix2(1, 0) = 1;
-  matrix2(1, 1) = -1;
-  matrix1 = matrix.inverse_matrix();
-  ASSERT_EQ(matrix1.eq_matrix(matrix2), true);
+  matrix1(0, 0) = -2;
+  matrix1(0, 1) = 3;
+  matrix1(1, 0) = 1;
+  matrix1(1, 1) = -1;
+  matrix.inverse_matrix();
+  ASSERT_EQ(matrix.eq_matrix(matrix1), true);
 }
 
 int main(int argc, char *argv[]) {
   testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }
-// #include <iostream>
-// #include "s21_matrix_oop.h"
-
+//#include <iostream>
+//#include "s21_matrix_oop.h"
+//
 // int main() {
-//   S21Matrix matrix(3, 3);
-//   S21Matrix matrix1(matrix);
-//   S21Matrix matrix2(matrix);
-//   matrix2 = matrix + matrix1;
-//   // ma==
-//     // matrix.number_padding();
-//     // matrix.calc_complements();
-//     matrix.print_matrix();
-//     //std::cout << matrix2 << std::endl;
-//     return 0;
-// }
+// S21Matrix matrix(2, 2);
+// S21Matrix matrix1(2, 2);
+// matrix(0,0) = 1;
+// matrix(0,1) = 3;
+// matrix(1,0) = 1;
+// matrix(1,1) = 2;
+// matrix1(0, 0) = -2;
+// matrix1(0, 1) = 3;
+// matrix1(1, 0) = 1;
+// matrix1(1, 1) = -1;
+// matrix.inverse_matrix();
+// matrix.print_matrix();
+//}

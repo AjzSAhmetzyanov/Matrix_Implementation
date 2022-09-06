@@ -1,6 +1,6 @@
 .PHONY: all  clean test  s21_matrix_oop.a objects build_lib rebuild clean_obj
 CC=gcc
-CFLAGS=-Wall -Werror -Wextra -lstdc++
+CFLAGS=-Wall -Werror -Wextra -lstdc++ -std=c++17 
 
 all: test
 
@@ -10,7 +10,7 @@ build_lib: objects
 	@ar rc s21_matrix_oop.a s21_matrix_oop.o
 	@ranlib s21_matrix_oop.a
 
-objects:
+objects: s21_matrix_oop.cc
 	@$(CC) $(CFLAGS) -c s21_matrix_oop.cc
 
 test: s21_matrix_oop.a s21_matrix_test.cc
@@ -25,7 +25,7 @@ clean_obj:
 	@rm -rf *.o
 
 clean:
-	@rm -rf *.a ./test
+	@rm -rf *.a ./test a.out
 	# @rm -rf ./test
 
 rebuild: clean all
